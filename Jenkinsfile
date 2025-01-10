@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker build -t awanmbandi/adservice:latest ."
+                        sh "docker build -t kingsleyzikora/adservice:latest ."
                     }
                 }
             }
@@ -57,7 +57,7 @@ pipeline {
         // Execute SCA/Dependency Test on Service Docker Image
         stage('Snyk SCA Test | Dependencies') {
             steps {
-                sh "${SNYK_HOME}/snyk-linux test --docker awanmbandi/adservice:latest || true" 
+                sh "${SNYK_HOME}/snyk-linux test --docker kingsleyzikora/adservice:latest || true" 
             }
         }
         // Push Service Image to DockerHub
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker push awanmbandi/adservice:latest "
+                        sh "docker push kingsleyzikora/adservice:latest "
                     }
                 }
             }
